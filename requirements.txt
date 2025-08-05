@@ -22,6 +22,17 @@ cvxpy==1.4.1
 # Optional: Uncomment if you want to use MongoDB/Redis for data storage
 # pymongo==4.6.0
 # redis==5.0.1
+
+# LoRA and Model Dependencies
+torch>=2.0.0
+transformers>=4.35.0
+peft>=0.6.0
+accelerate>=0.24.0
+bitsandbytes>=0.41.0
+datasets>=2.14.0
+tokenizers>=0.14.0
+sentencepiece>=0.1.99
+protobuf>=3.20.0
 fastapi==0.104.1
 uvicorn==0.24.0
 python-dotenv==1.0.0
