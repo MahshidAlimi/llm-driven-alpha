@@ -4,10 +4,10 @@ from datetime import datetime, timedelta
 import warnings
 warnings.filterwarnings('ignore')
 
-from config import Config
-from universe_selection import FixedIncomeUniverse
-from optimization import PortfolioOptimizer
-from backtest import Backtester
+from src.core.config import Config
+from src.core.universe_selection import FixedIncomeUniverse
+from src.optimization.optimization import PortfolioOptimizer
+from src.backtesting.backtest import Backtester
 
 def test_basic_functionality():
     print("Testing Fixed Income Trading System Basic Functionality")

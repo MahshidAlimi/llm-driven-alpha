@@ -72,10 +72,18 @@ Edit `config.py` to customize:
 
 ### Basic Usage
 ```python
-from main import FixedIncomeTradingSystem
+# Option 1: Import and use
+from src.main import FixedIncomeTradingSystem
 
 system = FixedIncomeTradingSystem()
 optimization_results, backtest_results = system.run_complete_analysis()
+
+# Option 2: Run from command line
+python run.py
+
+# Option 3: Install and run as command
+pip install -e .
+fixed-income-trading
 ```
 
 ### ML-Enhanced Strategy
@@ -99,15 +107,27 @@ rl_optimizer = system.run_rl_strategy()
 
 ```
 llm-driven-alpha/
-├── config.py              # Configuration settings
-├── universe_selection.py  # Universe selection and filtering
-├── factor_analysis.py     # Factor analysis and NLP
-├── optimization.py        # Portfolio optimization methods
-├── backtest.py           # Backtesting engine
-├── main.py               # Main execution script
-├── requirements.txt      # Python dependencies
-├── env_example.txt       # Environment variables template
-└── README.md            # This file
+├── src/
+│   ├── core/
+│   │   ├── config.py              # Configuration settings
+│   │   └── universe_selection.py  # Universe selection and filtering
+│   ├── analysis/
+│   │   └── factor_analysis.py     # Factor analysis and NLP
+│   ├── optimization/
+│   │   └── optimization.py        # Portfolio optimization methods
+│   ├── backtesting/
+│   │   └── backtest.py           # Backtesting engine
+│   └── main.py                   # Main execution script
+├── tests/
+│   └── test_system.py            # System tests
+├── configs/
+│   └── env_example.txt           # Environment variables template
+├── data/                         # Data storage directory
+├── docs/                         # Documentation
+├── run.py                       # Main entry point
+├── setup.py                     # Package setup
+├── requirements.txt             # Python dependencies
+└── README.md                   # This file
 ```
 
 ## Key Components
