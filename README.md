@@ -86,6 +86,45 @@ pip install -e .
 fixed-income-trading
 ```
 
+### Testing
+
+The project includes comprehensive unit tests for all components:
+
+```bash
+# Run all tests
+python tests/run_tests.py
+
+# Run specific test module
+python tests/run_tests.py --module test_universe_selection
+
+# Run specific test class
+python tests/run_tests.py --module test_optimization --class TestPortfolioOptimizer
+
+# Run individual test files
+python -m pytest tests/
+python -m unittest tests.test_universe_selection
+```
+
+#### Test Coverage
+
+- **Unit Tests**: Individual component testing with mocked dependencies
+- **Integration Tests**: End-to-end workflow testing
+- **Edge Case Testing**: Error handling and boundary conditions
+- **Performance Testing**: Metrics validation and consistency checks
+
+#### Test Structure
+
+```
+tests/
+├── test_config.py              # Configuration tests
+├── test_universe_selection.py  # Universe selection tests
+├── test_factor_analysis.py     # Factor analysis tests
+├── test_optimization.py        # Optimization tests
+├── test_backtest.py           # Backtesting tests
+├── test_system.py             # Integration tests
+└── run_tests.py               # Test runner
+```
+
 ### ML-Enhanced Strategy
 ```python
 ml_predictions = system.run_ml_enhanced_strategy()
@@ -194,18 +233,3 @@ The system generates interactive plots showing:
 - Reward function based on portfolio returns
 - Continuous learning and adaptation
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-This project is for educational and research purposes. Please ensure compliance with relevant financial regulations before using in production.
-
-## Disclaimer
-
-This software is for educational purposes only. Past performance does not guarantee future results. Always consult with financial professionals before making investment decisions. 
