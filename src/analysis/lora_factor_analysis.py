@@ -318,6 +318,8 @@ Analyze the following financial text and provide sentiment analysis in JSON form
         
         return pd.DataFrame(sentiments)
     
+
+    
     def get_twitter_sentiment(self, ticker: str, count: int = 100) -> pd.DataFrame:
         if not self.twitter_client:
             return pd.DataFrame()

@@ -126,11 +126,15 @@ GRADIENT_ACCUMULATION_STEPS=4           # Gradient accumulation
 LORA_MODEL_PATH=./lora_financial_model  # LoRA model save path
 TRAINING_DATA_PATH=./training_data      # Training data path
 
-# API Keys (optional for social media sentiment)
-TWITTER_BEARER_TOKEN=your_twitter_token
-REDDIT_CLIENT_ID=your_reddit_id
-REDDIT_CLIENT_SECRET=your_reddit_secret
-REDDIT_USER_AGENT=your_user_agent
+# API Keys
+OPENAI_API_KEY=your_openai_api_key_here
+ANTHROPIC_API_KEY=your_anthropic_api_key_here
+
+# Optional: Social Media APIs
+TWITTER_BEARER_TOKEN=your_twitter_bearer_token_here
+REDDIT_CLIENT_ID=your_reddit_client_id_here
+REDDIT_CLIENT_SECRET=your_reddit_client_secret_here
+REDDIT_USER_AGENT=your_reddit_user_agent_here
 ```
 
 ## Usage
