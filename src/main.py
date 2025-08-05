@@ -4,11 +4,11 @@ from datetime import datetime, timedelta
 import warnings
 warnings.filterwarnings('ignore')
 
-from config import Config
-from universe_selection import FixedIncomeUniverse
-from factor_analysis import FactorAnalysis
-from optimization import PortfolioOptimizer, MLPortfolioOptimizer, RLPortfolioOptimizer
-from backtest import Backtester
+from src.core.config import Config
+from src.core.universe_selection import FixedIncomeUniverse
+from src.analysis.factor_analysis import FactorAnalysis
+from src.optimization.optimization import PortfolioOptimizer, MLPortfolioOptimizer, RLPortfolioOptimizer
+from src.backtesting.backtest import Backtester
 
 class FixedIncomeTradingSystem:
     def __init__(self):

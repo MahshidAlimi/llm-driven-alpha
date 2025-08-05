@@ -72,10 +72,57 @@ Edit `config.py` to customize:
 
 ### Basic Usage
 ```python
-from main import FixedIncomeTradingSystem
+# Option 1: Import and use
+from src.main import FixedIncomeTradingSystem
 
 system = FixedIncomeTradingSystem()
 optimization_results, backtest_results = system.run_complete_analysis()
+
+# Option 2: Run from command line
+python run.py
+
+# Option 3: Install and run as command
+pip install -e .
+fixed-income-trading
+```
+
+### Testing
+
+The project includes comprehensive unit tests for all components:
+
+```bash
+# Run all tests
+python tests/run_tests.py
+
+# Run specific test module
+python tests/run_tests.py --module test_universe_selection
+
+# Run specific test class
+python tests/run_tests.py --module test_optimization --class TestPortfolioOptimizer
+
+# Run individual test files
+python -m pytest tests/
+python -m unittest tests.test_universe_selection
+```
+
+#### Test Coverage
+
+- **Unit Tests**: Individual component testing with mocked dependencies
+- **Integration Tests**: End-to-end workflow testing
+- **Edge Case Testing**: Error handling and boundary conditions
+- **Performance Testing**: Metrics validation and consistency checks
+
+#### Test Structure
+
+```
+tests/
+├── test_config.py              # Configuration tests
+├── test_universe_selection.py  # Universe selection tests
+├── test_factor_analysis.py     # Factor analysis tests
+├── test_optimization.py        # Optimization tests
+├── test_backtest.py           # Backtesting tests
+├── test_system.py             # Integration tests
+└── run_tests.py               # Test runner
 ```
 
 ### ML-Enhanced Strategy
@@ -99,15 +146,27 @@ rl_optimizer = system.run_rl_strategy()
 
 ```
 llm-driven-alpha/
-├── config.py              # Configuration settings
-├── universe_selection.py  # Universe selection and filtering
-├── factor_analysis.py     # Factor analysis and NLP
-├── optimization.py        # Portfolio optimization methods
-├── backtest.py           # Backtesting engine
-├── main.py               # Main execution script
-├── requirements.txt      # Python dependencies
-├── env_example.txt       # Environment variables template
-└── README.md            # This file
+├── src/
+│   ├── core/
+│   │   ├── config.py              # Configuration settings
+│   │   └── universe_selection.py  # Universe selection and filtering
+│   ├── analysis/
+│   │   └── factor_analysis.py     # Factor analysis and NLP
+│   ├── optimization/
+│   │   └── optimization.py        # Portfolio optimization methods
+│   ├── backtesting/
+│   │   └── backtest.py           # Backtesting engine
+│   └── main.py                   # Main execution script
+├── tests/
+│   └── test_system.py            # System tests
+├── configs/
+│   └── env_example.txt           # Environment variables template
+├── data/                         # Data storage directory
+├── docs/                         # Documentation
+├── run.py                       # Main entry point
+├── setup.py                     # Package setup
+├── requirements.txt             # Python dependencies
+└── README.md                   # This file
 ```
 
 ## Key Components
@@ -174,18 +233,3 @@ The system generates interactive plots showing:
 - Reward function based on portfolio returns
 - Continuous learning and adaptation
 
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
-## License
-
-This project is for educational and research purposes. Please ensure compliance with relevant financial regulations before using in production.
-
-## Disclaimer
-
-This software is for educational purposes only. Past performance does not guarantee future results. Always consult with financial professionals before making investment decisions. 
