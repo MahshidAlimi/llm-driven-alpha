@@ -92,8 +92,6 @@ class LoRAFactorAnalysis:
             
             self.model = get_peft_model(self.model, lora_config)
             
-            print(f"LoRA model initialized successfully on {self.device}")
-            
         except Exception as e:
             print(f"Error initializing LoRA model: {e}")
             print("Falling back to basic sentiment analysis")
@@ -322,42 +320,55 @@ Analyze the following financial text and provide sentiment analysis in JSON form
     
     def get_twitter_sentiment(self, ticker: str, count: int = 100) -> pd.DataFrame:
         if not self.twitter_client:
+            print(f"No Twitter client configured. Set TWITTER_BEARER_TOKEN in environment variables.")
             return pd.DataFrame()
         
         try:
             query = f"{ticker} -is:retweet lang:en"
+            print(f"Searching Twitter for: {query}")
             tweets = self.twitter_client.search_recent_tweets(query=query, max_results=count)
             
             sentiments = []
-            for tweet in tweets.data or []:
-                sentiment = self.analyze_financial_sentiment_lora(tweet.text)
-                sentiment['date'] = tweet.created_at
-                sentiment['tweet_id'] = tweet.id
-                sentiments.append(sentiment)
+            if tweets.data:
+                print(f"Found {len(tweets.data)} tweets for {ticker}")
+                for tweet in tweets.data:
+                    sentiment = self.analyze_financial_sentiment_lora(tweet.text)
+                    sentiment['date'] = tweet.created_at
+                    sentiment['tweet_id'] = tweet.id
+                    sentiments.append(sentiment)
+            else:
+                print(f"No tweets found for {ticker}")
             
             return pd.DataFrame(sentiments)
-        except:
+        except Exception as e:
+            print(f"Error fetching Twitter data for {ticker}: {e}")
             return pd.DataFrame()
     
     def get_reddit_sentiment(self, ticker: str, subreddits: List[str] = ['investing', 'stocks', 'wallstreetbets']) -> pd.DataFrame:
         if not self.reddit_client:
+            print(f"No Reddit client configured. Set REDDIT_CLIENT_ID, REDDIT_CLIENT_SECRET, and REDDIT_USER_AGENT in environment variables.")
             return pd.DataFrame()
         
         sentiments = []
+        print(f"Searching Reddit for {ticker} in subreddits: {subreddits}")
         for subreddit_name in subreddits:
             try:
                 subreddit = self.reddit_client.subreddit(subreddit_name)
                 posts = subreddit.search(ticker, limit=50, time_filter='week')
+                post_list = list(posts)
+                print(f"Found {len(post_list)} posts in r/{subreddit_name} for {ticker}")
                 
-                for post in posts:
+                for post in post_list:
                     sentiment = self.analyze_financial_sentiment_lora(post.title + " " + post.selftext)
                     sentiment['date'] = post.created_utc
                     sentiment['subreddit'] = subreddit_name
                     sentiment['score'] = post.score
                     sentiments.append(sentiment)
-            except:
+            except Exception as e:
+                print(f"Error fetching Reddit data from r/{subreddit_name} for {ticker}: {e}")
                 continue
         
+        print(f"Total Reddit posts analyzed for {ticker}: {len(sentiments)}")
         return pd.DataFrame(sentiments)
     
     def extract_triplets(self, text: str) -> List[Tuple[str, str, str]]:

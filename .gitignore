@@ -2,6 +2,11 @@
 .env
 env_example.txt
 
+# PDF Rotation Tools
+pdf_orientation_fix*.py
+rotate_pdf*.py
+*rotation*.py
+
 # Python
 __pycache__/
 *.py[cod]
